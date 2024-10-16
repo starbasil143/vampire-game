@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
 
     private PlayerInput _playerInput;
     private InputAction _moveAction;
+    private InputAction _dashAction;
 
 
     private void Awake()
@@ -16,6 +17,7 @@ public class InputManager : MonoBehaviour
         _playerInput = GetComponent<PlayerInput>();
 
         _moveAction = _playerInput.actions["Move"];
+        _dashAction = _playerInput.actions["Dash"];
     }
 
     private void Update()
