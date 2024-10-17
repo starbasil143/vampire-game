@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Animator _animator;
 
-    private const string  _horizontal = "Horizontal";
+    private const string _horizontal = "Horizontal";
     private const string _vertical = "Vertical";
     private const string _lastHorizontal = "LastHorizontal";
     private const string _lastVertical = "LastVertical";
