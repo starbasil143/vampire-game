@@ -6,6 +6,8 @@ public class PlayerScript : MonoBehaviour
 {
 
     
+    [SerializeField] private Camera _camera;
+    [SerializeField] private Transform _player;
     private Rigidbody2D _rigidbody;
     private bool isChargingSpell;
     public float spellChargeSpeed = .02f;
@@ -15,6 +17,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Awake()
     {
+        _camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
