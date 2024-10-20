@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    
+    [SerializeField] private Camera _camera;
+    [SerializeField] private Transform _player;
+    private Rigidbody2D _rigidbody;
+
+    void Awake()
     {
+        
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

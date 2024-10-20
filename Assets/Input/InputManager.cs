@@ -7,6 +7,8 @@ public class InputManager : MonoBehaviour
 {
     public static Vector2 Movement;
     public static bool Casting;
+    public static bool Dash;
+    public static bool CastingUp;
 
     private PlayerInput _playerInput;
     private InputAction _moveAction;
@@ -26,6 +28,8 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         Movement = _moveAction.ReadValue<Vector2>();
+        Dash = _dashAction.WasPressedThisFrame();
         Casting = _castAction.IsPressed();
+        CastingUp = _castAction.WasReleasedThisFrame();
     }
 }
