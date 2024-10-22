@@ -11,6 +11,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private Transform _player;
     [SerializeField] private GameObject _projectile;
+    private Animator _animator;
     private Rigidbody2D _rigidbody;
     private bool isChargingSpell;
     public float spellChargeSpeed = .02f;
@@ -22,6 +23,7 @@ public class PlayerScript : MonoBehaviour
     {
         _camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         _rigidbody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -62,5 +64,30 @@ public class PlayerScript : MonoBehaviour
         Vector2 shootForce = mousePos.normalized * 11;
         Physics2D.IgnoreCollision(Flame.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
         Flame.GetComponent<Rigidbody2D>().AddForce(shootForce, ForceMode2D.Impulse);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Harm")
+        {
+            Damage(8f);
+        }
+    }
+
+    private void Damage(float damage)
+    {
+        soulAmount -= damage;
+        _animator.Play("Damage", -1, 0f);
+        Debug.Log(soulAmount);
+        if(soulAmount <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log("bro died");
+        gameObject.transform.localScale = new Vector3(1,.1f,1);
     }
 }
