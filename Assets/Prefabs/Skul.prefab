@@ -103,9 +103,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 100
-  RandomMovementRange: 2
-  RandomMovementSpeed: 0.5
-  ProjectilePrefab: {fileID: 4299118540658538459, guid: 39756a2453cfd9044be4262f058d1926, type: 3}
+  EnemyIdleBase: {fileID: 11400000, guid: 2c0483d5ff3650c49bdb59541076e4cf, type: 2}
+  EnemyChaseBase: {fileID: 11400000, guid: e49d4a7cf8203604d94a3a1e08f59925, type: 2}
+  EnemyAttackBase: {fileID: 11400000, guid: 122e29cf0df09634b9b1b7f8025a76ff, type: 2}
 --- !u!50 &4266670170965803953
 Rigidbody2D:
   serializedVersion: 4

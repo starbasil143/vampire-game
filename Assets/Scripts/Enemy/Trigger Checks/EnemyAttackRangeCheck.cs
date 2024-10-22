@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyAttackRangeCheck : MonoBehaviour
 {
     public GameObject PlayerTarget { get; set; }
+
     private Enemy _enemy;
 
     private void Awake()
