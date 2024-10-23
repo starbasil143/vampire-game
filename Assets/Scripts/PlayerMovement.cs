@@ -6,15 +6,20 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _dashSpeed = 90f;
-    [SerializeField] private float _dashCooldown = 1f;
     [SerializeField] private float _dashLength = .2f;
+    [SerializeField] private float _dashCooldown = 1f;
+    [SerializeField] private float _guardLength = .2f;
+    [SerializeField] private float _guardCooldown = .5f;
+
     private float _currentDashCooldown = 0f;
+    private float _currentGuardCooldown = 0f;
     private bool _isDashing;
     private Vector2 _lastDirection;
 
     private Vector2 _movement;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
+    private PlayerScript _player;
 
     private const string _horizontal = "Horizontal";
     private const string _vertical = "Vertical";
@@ -25,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _player = GetComponent<PlayerScript>();
     }
 
     private void Update()
@@ -70,5 +76,27 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetFloat(_lastHorizontal, _movement.x);
             _animator.SetFloat(_lastVertical, _movement.y);
         }
+
+
+        // Guarding
+        if (InputManager.Guard && _currentGuardCooldown <= 0)
+        {
+            _player.isGuarding = true;
+            _currentGuardCooldown = _guardCooldown;
+            _animator.Play("Guard");
+        }
+        if (_player.isGuarding)
+        {
+            if (_guardCooldown - _currentGuardCooldown >= _guardLength)
+            {
+                _player.isGuarding = false;
+                _animator.Play("Normal");
+            }
+        }
+        if (_currentGuardCooldown > 0)
+        {
+            _currentGuardCooldown -= Time.deltaTime;
+        }
+
     }
 }

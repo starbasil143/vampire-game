@@ -75,9 +75,13 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("EnemyDamager"))
+        if(collision.gameObject.CompareTag("Harm") && collision.gameObject.GetComponent<HarmfulObjectScript>().canDamageEnemy)
         {
-            Damage(collision.gameObject.GetComponent<EnemyDamagerScript>().damageAmount * enemyDefense);
+            Damage(collision.gameObject.GetComponent<HarmfulObjectScript>().damageAmount * enemyDefense);
+            if (collision.gameObject.GetComponent<HarmfulObjectScript>().destroyOnContact)
+            {
+                collision.gameObject.GetComponent<HarmfulObjectScript>().DestroySelf();
+            }
         }
     }
 

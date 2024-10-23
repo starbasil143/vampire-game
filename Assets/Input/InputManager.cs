@@ -9,11 +9,13 @@ public class InputManager : MonoBehaviour
     public static bool Casting;
     public static bool Dash;
     public static bool CastingUp;
+    public static bool Guard;
 
     private PlayerInput _playerInput;
     private InputAction _moveAction;
     private InputAction _dashAction;
     private InputAction _castAction;
+    private InputAction _guardAction;
 
 
     private void Awake()
@@ -23,6 +25,7 @@ public class InputManager : MonoBehaviour
         _moveAction = _playerInput.actions["Move"];
         _dashAction = _playerInput.actions["Dash"];
         _castAction = _playerInput.actions["Cast"];
+        _guardAction = _playerInput.actions["Guard"];
     }
 
     private void Update()
@@ -31,5 +34,6 @@ public class InputManager : MonoBehaviour
         Dash = _dashAction.WasPressedThisFrame();
         Casting = _castAction.IsPressed();
         CastingUp = _castAction.WasReleasedThisFrame();
+        Guard = _guardAction.WasPressedThisFrame();
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Harm
   - EnemyDamager
+  - PlayerDamager
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - Enemy Damager
+  - Harm
   - Range
   - 
   - 

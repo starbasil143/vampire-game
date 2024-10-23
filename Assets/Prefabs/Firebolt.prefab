@@ -94,11 +94,11 @@ GameObject:
   - component: {fileID: 6158692225217984257}
   - component: {fileID: -881403260039384952}
   - component: {fileID: 1668979141148221495}
-  - component: {fileID: 8286851271381368549}
+  - component: {fileID: 1026241536701362806}
   - component: {fileID: 5885064144600665332}
   m_Layer: 7
-  m_Name: Projectile
-  m_TagString: EnemyDamager
+  m_Name: Firebolt
+  m_TagString: Harm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -219,7 +219,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8286851271381368549
+--- !u!114 &1026241536701362806
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,10 +228,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7239454338204669779}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a68c87ebcef9e1642916cf0ab0dd45b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 08c9e786abfbb1b4b88570463e4f3ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 50
+  isBlockable: 0
+  destroyOnContact: 1
+  canDamagePlayer: 0
+  canDamageEnemy: 1
   existenceTime: 10
 --- !u!61 &5885064144600665332
 BoxCollider2D:

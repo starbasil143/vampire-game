@@ -16,8 +16,19 @@ public class PlayerScript : MonoBehaviour
     private bool isChargingSpell;
     public float spellChargeSpeed = .02f;
     private float spellCharge;
-    public float maxSoulAmount = 25f;
-    public float soulAmount = 25f;
+    public float maxSoulAmount = 100f;
+    public float soulAmount = 100f;
+
+    public enum PlayerState
+    {
+        Idle,
+        Walking,
+        Dashing,
+        Defeated
+    }
+
+    public PlayerState currentPlayerState;
+    public bool isGuarding;
 
     private void Awake()
     {
@@ -26,9 +37,13 @@ public class PlayerScript : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        currentPlayerState = PlayerState.Idle;
+    }
+
     void Update()
     {
-        
         #region CASTING
         /*
         if(InputManager.Casting)
@@ -54,6 +69,8 @@ public class PlayerScript : MonoBehaviour
 
 
         #endregion
+    
+    
     }
 
     void SacredFlame()
@@ -68,9 +85,35 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Harm")
+        if (collision.gameObject.CompareTag("Harm") && collision.gameObject.GetComponent<HarmfulObjectScript>().canDamagePlayer)
         {
-            Damage(8f);
+            if (isGuarding && collision.gameObject.GetComponent<HarmfulObjectScript>().isBlockable)
+            {
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity = 
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude 
+                * (collision.gameObject.transform.position - transform.position).normalized;
+
+                if (collision.gameObject.GetComponent<RotateScript>())
+                {
+                    collision.gameObject.GetComponent<RotateScript>().rotationSpeed *= -1;
+                }
+                
+                if (collision.gameObject.GetComponent<HarmfulObjectScript>().Source)
+                {
+                    Physics2D.IgnoreCollision(
+                    collision.gameObject.GetComponent<Collider2D>(), 
+                    collision.gameObject.GetComponent<HarmfulObjectScript>().Source.GetComponent<Collider2D>(), 
+                    false);
+                }
+            }
+            else
+            {
+                Damage(collision.gameObject.GetComponent<HarmfulObjectScript>().damageAmount);
+                if (collision.gameObject.GetComponent<HarmfulObjectScript>().destroyOnContact)
+                {
+                    Destroy(collision.gameObject);
+                }
+            }
         }
     }
 
@@ -87,7 +130,6 @@ public class PlayerScript : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("bro died");
         gameObject.transform.localScale = new Vector3(1,.1f,1);
     }
 }

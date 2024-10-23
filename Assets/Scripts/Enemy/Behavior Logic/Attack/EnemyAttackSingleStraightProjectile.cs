@@ -36,10 +36,12 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
             _timer = 0f;
             
             Vector2 attackDir = (playerTransform.position - enemy.transform.position).normalized;
-            Rigidbody2D projectile = GameObject.Instantiate(ProjectilePrefab, enemy.transform.position, Quaternion.identity);
-            projectile.GetComponent<Rigidbody2D>().velocity = attackDir * _projectileSpeed;  
+            Rigidbody2D projectile = GameObject.Instantiate(ProjectilePrefab, enemy.transform.position + new Vector3(attackDir.x, attackDir.y, 0) * .1f, Quaternion.identity);
+            projectile.GetComponent<HarmfulObjectScript>().Source = gameObject;
+            Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>(), true);
+            projectile.GetComponent<Rigidbody2D>().velocity = attackDir * _projectileSpeed;
         }
-
+        
         if (Vector2.Distance(playerTransform.position, enemy.transform.position) > _distanceToCountExit)
         {
             _exitTimer += Time.deltaTime;
