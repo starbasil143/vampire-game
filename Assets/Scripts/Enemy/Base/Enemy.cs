@@ -9,7 +9,9 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 {
     [field: SerializeField] public float MaxHealth { get; set; } = 100f;
     public float CurrentHealth { get; set; }
+    public float enemyDefense = 1f;
     public Rigidbody2D rigidBody { get; set; }
+    public Animator animator { get; set; }
     public bool isFacingRight { get; set; } = false;
     public bool IsInChaseRange { get; set; }
     public bool IsInAttackRange { get; set; }
@@ -52,6 +54,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     {
         CurrentHealth = MaxHealth;
         rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        
 
         EnemyIdleBaseInstance.Initialize(gameObject, this);
         EnemyChaseBaseInstance.Initialize(gameObject, this);
@@ -69,11 +73,24 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         StateMachine.CurrentEnemyState.PhysicsUpdate();
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("EnemyDamager"))
+        {
+            Damage(collision.gameObject.GetComponent<EnemyDamagerScript>().damageAmount * enemyDefense);
+        }
+    }
+
 
     #region Health/Die Functions
     public void Damage(float damageAmount)
     {
         CurrentHealth -= damageAmount;
+
+        if (damageAmount > 0)
+        {
+            animator.Play("Hurt", -1, 0f);
+        }
 
         if (CurrentHealth <= 0)
         {

@@ -45,6 +45,7 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
             _exitTimer += Time.deltaTime;
             if (_exitTimer > _timeUntilExit)
             {
+                _exitTimer = 0f;
                 enemy.StateMachine.ChangeState(enemy.IdleState);
             }
         }

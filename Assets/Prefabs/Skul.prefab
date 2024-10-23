@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 651568267317714061}
   - component: {fileID: 4266670170965803953}
   - component: {fileID: 8455067237208621833}
-  - component: {fileID: 8101189343577014526}
-  m_Layer: 0
+  - component: {fileID: 7614486373938518095}
+  m_Layer: 6
   m_Name: Skul
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 100
+  enemyDefense: 1
   EnemyIdleBase: {fileID: 11400000, guid: 2c0483d5ff3650c49bdb59541076e4cf, type: 2}
   EnemyChaseBase: {fileID: 11400000, guid: e49d4a7cf8203604d94a3a1e08f59925, type: 2}
   EnemyAttackBase: {fileID: 11400000, guid: 122e29cf0df09634b9b1b7f8025a76ff, type: 2}
@@ -162,7 +163,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0019043684, y: -0.0008714497}
@@ -178,21 +179,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.15081501, y: 0.29236257}
   m_EdgeRadius: 0
---- !u!114 &8101189343577014526
-MonoBehaviour:
+--- !u!95 &7614486373938518095
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 22847751410299174}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82a6b36cd47616442920adc056559b45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  _attackRate: 3
-  _bone: {fileID: 7572832538889162841, guid: 39756a2453cfd9044be4262f058d1926, type: 3}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 37c00fe35261c4341975614e6fbf0991, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7298789207609027821
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +211,7 @@ GameObject:
   - component: {fileID: 4546551469865365840}
   - component: {fileID: 1383103632108394787}
   - component: {fileID: 2089405113429572703}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,10 +245,10 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -284,7 +291,7 @@ GameObject:
   - component: {fileID: 8391932433450749205}
   - component: {fileID: 480536374228183472}
   - component: {fileID: 731145404897622379}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ChaseRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,10 +325,10 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
