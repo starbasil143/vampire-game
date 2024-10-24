@@ -19,12 +19,14 @@ public class PlayerScript : MonoBehaviour
     public float maxSoulAmount = 100f;
     public float soulAmount = 100f;
     public Image healthBar;
+    public bool onPause;
 
     public AudioSource FireSoundSource;
     public AudioSource DashSoundSource;
     public AudioSource DamageSoundSource;
     public AudioSource GuardSoundSource;
     public AudioSource ParrySoundSource;
+    public AudioSource HealSoundSource;
 
     public enum PlayerState
     {
@@ -72,7 +74,10 @@ public class PlayerScript : MonoBehaviour
 
         if (InputManager.CastingUp)
         {
-            SacredFlame();
+            if( !onPause )
+            {
+                SacredFlame();
+            }
         }
 
 
@@ -129,6 +134,12 @@ public class PlayerScript : MonoBehaviour
                 }
             }
         }
+   
+        if (collision.gameObject.CompareTag("HealPickup"))
+        {
+            Heal(50f);
+            Destroy(collision.gameObject);
+        }
     }
 
     private void Damage(float damage)
@@ -144,8 +155,41 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    private void Heal(float health)
+    {
+        if (soulAmount + health <= maxSoulAmount)
+        {
+            soulAmount += health;
+        }
+        else
+        {
+            soulAmount = maxSoulAmount;
+        }
+        
+        healthBar.fillAmount = soulAmount / 100f;
+        HealSoundSource.Play();
+    }
+
     private void Die()
     {
         gameObject.transform.localScale = new Vector3(1,.1f,1);
     }
+
+
+    #region Light Stuff
+
+    public void LightOff()
+    {
+        _animator.Play("LightOff");
+    }
+    public void LightOn()
+    {
+        _animator.Play("LightActivate");
+    }
+    public void LightFlicker()
+    {
+        _animator.Play("LightFlicker");
+    }
+
+    #endregion
 }

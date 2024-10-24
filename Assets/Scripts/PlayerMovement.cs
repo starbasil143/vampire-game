@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerScript _player;
     public AudioSource DashSoundSource;
     public AudioSource GuardSoundSource;
+    public bool onPause;
 
     private const string _horizontal = "Horizontal";
     private const string _vertical = "Vertical";
@@ -37,69 +38,72 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        // Walking
-        if(!_isDashing)
+        if (!onPause)
         {
-            _movement.Set(InputManager.Movement.x, InputManager.Movement.y);
-            _rigidbody.velocity = _movement * _moveSpeed;
-        }
-
-        // Dashing
-        if (InputManager.Dash && _currentDashCooldown <= 0)
-        {
-            _isDashing = true;
-            _currentDashCooldown = _dashCooldown;
-            _movement = _lastDirection;
-            DashSoundSource.Play();
-        }
-        if (_isDashing)
-        {
-            _rigidbody.velocity = _movement * Mathf.Lerp(_dashSpeed, _moveSpeed, (_dashCooldown - _currentDashCooldown)/_dashLength);
-
-            if (_dashCooldown - _currentDashCooldown >= _dashLength)
+            // Walking
+            if(!_isDashing)
             {
-                _isDashing = false;
+                _movement.Set(InputManager.Movement.x, InputManager.Movement.y);
+                _rigidbody.velocity = _movement * _moveSpeed;
             }
-        }
-        if (_currentDashCooldown > 0)
-        {
-            _currentDashCooldown -= Time.deltaTime;
-            if (_currentDashCooldown <= 0)
+
+            // Dashing
+            if (InputManager.Dash && _currentDashCooldown <= 0)
             {
-                _isDashing = false;
+                _isDashing = true;
+                _currentDashCooldown = _dashCooldown;
+                _movement = _lastDirection;
+                DashSoundSource.Play();
             }
-        }
-        
-        // Not moving
-        _animator.SetFloat(_horizontal, _movement.x);
-        _animator.SetFloat(_vertical, _movement.y);
-        if (_movement != Vector2.zero)
-        {
-            _lastDirection = _movement;
-            _animator.SetFloat(_lastHorizontal, _movement.x);
-            _animator.SetFloat(_lastVertical, _movement.y);
-        }
+            if (_isDashing)
+            {
+                _rigidbody.velocity = _movement * Mathf.Lerp(_dashSpeed, _moveSpeed, (_dashCooldown - _currentDashCooldown)/_dashLength);
+
+                if (_dashCooldown - _currentDashCooldown >= _dashLength)
+                {
+                    _isDashing = false;
+                }
+            }
+            if (_currentDashCooldown > 0)
+            {
+                _currentDashCooldown -= Time.deltaTime;
+                if (_currentDashCooldown <= 0)
+                {
+                    _isDashing = false;
+                }
+            }
+            
+            // Not moving
+            _animator.SetFloat(_horizontal, _movement.x);
+            _animator.SetFloat(_vertical, _movement.y);
+            if (_movement != Vector2.zero)
+            {
+                _lastDirection = _movement;
+                _animator.SetFloat(_lastHorizontal, _movement.x);
+                _animator.SetFloat(_lastVertical, _movement.y);
+            }
 
 
-        // Guarding
-        if (InputManager.Guard && _currentGuardCooldown <= 0)
-        {
-            _player.isGuarding = true;
-            _currentGuardCooldown = _guardCooldown;
-            GuardSoundSource.Play();
-            _animator.Play("Guard");
-        }
-        if (_player.isGuarding)
-        {
-            if (_guardCooldown - _currentGuardCooldown >= _guardLength)
+            // Guarding
+            if (InputManager.Guard && _currentGuardCooldown <= 0)
             {
-                _player.isGuarding = false;
-                _animator.Play("Normal");
+                _player.isGuarding = true;
+                _currentGuardCooldown = _guardCooldown;
+                GuardSoundSource.Play();
+                _animator.Play("Guard");
             }
-        }
-        if (_currentGuardCooldown > 0)
-        {
-            _currentGuardCooldown -= Time.deltaTime;
+            if (_player.isGuarding)
+            {
+                if (_guardCooldown - _currentGuardCooldown >= _guardLength)
+                {
+                    _player.isGuarding = false;
+                    _animator.Play("Normal");
+                }
+            }
+            if (_currentGuardCooldown > 0)
+            {
+                _currentGuardCooldown -= Time.deltaTime;
+            }
         }
 
     }
