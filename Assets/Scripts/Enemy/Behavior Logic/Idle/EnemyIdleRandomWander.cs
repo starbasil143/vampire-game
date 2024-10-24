@@ -28,6 +28,10 @@ public class EnemyIdleRandomWander : EnemyIdleSOBase
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
+    }
+    public override void DoPhysicsUpdateLogic()
+    {
+        base.DoPhysicsUpdateLogic();
 
         _direction = (_targetPos - enemy.transform.position).normalized;
 
@@ -37,10 +41,6 @@ public class EnemyIdleRandomWander : EnemyIdleSOBase
         {
             _targetPos = GetRandomPointInCircle();
         }
-    }
-    public override void DoPhysicsUpdateLogic()
-    {
-        base.DoPhysicsUpdateLogic();
     }
     public override void ResetValues()
     {

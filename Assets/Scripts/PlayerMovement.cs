@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     private PlayerScript _player;
+    public AudioSource DashSoundSource;
+    public AudioSource GuardSoundSource;
 
     private const string _horizontal = "Horizontal";
     private const string _vertical = "Vertical";
@@ -48,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
             _isDashing = true;
             _currentDashCooldown = _dashCooldown;
             _movement = _lastDirection;
+            DashSoundSource.Play();
         }
         if (_isDashing)
         {
@@ -83,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _player.isGuarding = true;
             _currentGuardCooldown = _guardCooldown;
+            GuardSoundSource.Play();
             _animator.Play("Guard");
         }
         if (_player.isGuarding)

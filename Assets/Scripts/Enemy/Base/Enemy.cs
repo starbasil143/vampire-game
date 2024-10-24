@@ -38,6 +38,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     public EnemyChaseSOBase EnemyChaseBaseInstance { get; set; }
     public EnemyAttackSOBase EnemyAttackBaseInstance { get; set; }
 
+    public AudioSource HurtSoundSource;
+
     #endregion
     private void Awake()
     {

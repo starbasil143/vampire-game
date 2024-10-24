@@ -53,6 +53,9 @@ TagManager:
   - name: Collision
     uniqueID: 3883081821
     locked: 0
+  - name: WalkInFront2
+    uniqueID: 2216699279
+    locked: 0
   - name: Player
     uniqueID: 3096765387
     locked: 0
@@ -61,6 +64,9 @@ TagManager:
     locked: 0
   - name: Decor
     uniqueID: 609906891
+    locked: 0
+  - name: UI
+    uniqueID: 2968164921
     locked: 0
   - name: Weather
     uniqueID: 4165705163

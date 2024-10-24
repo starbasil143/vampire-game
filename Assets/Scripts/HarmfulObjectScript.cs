@@ -32,7 +32,11 @@ public class HarmfulObjectScript : MonoBehaviour
     {
         if (ImpactObject)
         {
-            Instantiate(ImpactObject, transform.position, transform.rotation);
+            GameObject impact = Instantiate(ImpactObject, transform.position, transform.rotation);
+            /*if (impact.GetComponent<AudioSource>())
+            {
+                impact.GetComponent<AudioSource>().Play();
+            }*/
         }
         Destroy(gameObject);
     }

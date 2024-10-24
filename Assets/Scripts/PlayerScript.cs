@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -18,6 +18,13 @@ public class PlayerScript : MonoBehaviour
     private float spellCharge;
     public float maxSoulAmount = 100f;
     public float soulAmount = 100f;
+    public Image healthBar;
+
+    public AudioSource FireSoundSource;
+    public AudioSource DashSoundSource;
+    public AudioSource DamageSoundSource;
+    public AudioSource GuardSoundSource;
+    public AudioSource ParrySoundSource;
 
     public enum PlayerState
     {
@@ -40,6 +47,8 @@ public class PlayerScript : MonoBehaviour
     private void Start()
     {
         currentPlayerState = PlayerState.Idle;
+        
+        healthBar.fillAmount = soulAmount / 100f;
     }
 
     void Update()
@@ -79,6 +88,7 @@ public class PlayerScript : MonoBehaviour
         float castAngle = Vector2.SignedAngle(Vector2.right, mousePos);
         if (!Physics2D.Raycast(new Vector2(_player.position.x, _player.position.y) + mousePos.normalized*.5f, mousePos.normalized, .5f, 1<<LayerMask.NameToLayer("Collisions")))
         {
+            FireSoundSource.Play();
             GameObject Flame = Instantiate(_projectile, new Vector2(_player.position.x, _player.position.y) + mousePos.normalized, Quaternion.Euler(0, 0, castAngle));
             Vector2 shootForce = mousePos.normalized * 11;
             Physics2D.IgnoreCollision(Flame.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
@@ -92,6 +102,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (isGuarding && collision.gameObject.GetComponent<HarmfulObjectScript>().isBlockable)
             {
+                ParrySoundSource.Play();
                 collision.gameObject.GetComponent<Rigidbody2D>().velocity = 
                 collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude 
                 * (collision.gameObject.transform.position - transform.position).normalized;
@@ -123,7 +134,9 @@ public class PlayerScript : MonoBehaviour
     private void Damage(float damage)
     {
         soulAmount -= damage;
+        healthBar.fillAmount = soulAmount / 100f;
         _animator.Play("Damage", -1, 0f);
+        DamageSoundSource.Play();
         Debug.Log(soulAmount);
         if(soulAmount <= 0)
         {
