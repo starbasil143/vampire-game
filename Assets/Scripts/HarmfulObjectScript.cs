@@ -11,6 +11,7 @@ public class HarmfulObjectScript : MonoBehaviour
     public bool canDamageEnemy;
     public bool thwartedByWalls;
     public GameObject Source;
+    public GameObject ImpactObject;
 
     [SerializeField] private float existenceTime = 10f;
     private float existenceTimer = 0f;
@@ -29,6 +30,10 @@ public class HarmfulObjectScript : MonoBehaviour
     }
     public void DestroySelf()
     {
+        if (ImpactObject)
+        {
+            Instantiate(ImpactObject, transform.position, transform.rotation);
+        }
         Destroy(gameObject);
     }
 
