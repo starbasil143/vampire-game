@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     public bool isFacingRight { get; set; } = false;
     public bool IsInChaseRange { get; set; }
     public bool IsInAttackRange { get; set; }
+    public LayerMask RaycastingMask;
 
     #region State Machine Variables
 

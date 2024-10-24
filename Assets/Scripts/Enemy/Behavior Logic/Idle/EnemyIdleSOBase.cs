@@ -24,7 +24,18 @@ public class EnemyIdleSOBase : ScriptableObject
     {
         if (enemy.IsInChaseRange)
         {
-            enemy.StateMachine.ChangeState(enemy.ChaseState);
+            RaycastHit2D ray = Physics2D.Raycast(transform.position + (playerTransform.position - transform.position).normalized * 1.2f, playerTransform.position - transform.position, Mathf.Infinity, enemy.RaycastingMask);
+            if (ray.collider != null)
+            {
+                if (ray.collider.gameObject.CompareTag("Player"))
+                {
+                    enemy.StateMachine.ChangeState(enemy.ChaseState);
+                }
+                else
+                {
+                    Debug.Log(ray.collider.gameObject.name);  
+                }
+            }
         }
     }
     public virtual void DoPhysicsUpdateLogic() { }

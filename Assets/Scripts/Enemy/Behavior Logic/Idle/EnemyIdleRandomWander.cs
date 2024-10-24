@@ -29,11 +29,6 @@ public class EnemyIdleRandomWander : EnemyIdleSOBase
     {
         base.DoFrameUpdateLogic();
 
-        if (enemy.IsInChaseRange)
-        {
-            enemy.StateMachine.ChangeState(enemy.ChaseState);
-        }
-
         _direction = (_targetPos - enemy.transform.position).normalized;
 
         enemy.MoveEnemy(_direction * RandomMovementSpeed);

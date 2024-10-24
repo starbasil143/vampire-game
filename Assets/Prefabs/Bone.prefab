@@ -190,5 +190,6 @@ MonoBehaviour:
   destroyOnContact: 1
   canDamagePlayer: 1
   canDamageEnemy: 1
+  thwartedByWalls: 1
   Source: {fileID: 0}
   existenceTime: 10

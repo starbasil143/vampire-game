@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b118b9af7a42334a8bdf02e6a7c3975, type: 3}
   m_Name: Idle-Random Wander
   m_EditorClassIdentifier: 
-  RandomMovementRange: 5
-  RandomMovementSpeed: 1
+  RandomMovementRange: 2
+  RandomMovementSpeed: 0.3

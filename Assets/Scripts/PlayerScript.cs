@@ -77,10 +77,13 @@ public class PlayerScript : MonoBehaviour
     {
         Vector2 mousePos = new Vector2(Input.mousePosition.x - Screen.width/2, Input.mousePosition.y - Screen.height/2);
         float castAngle = Vector2.SignedAngle(Vector2.right, mousePos);
-        GameObject Flame = Instantiate(_projectile, new Vector2(_player.position.x, _player.position.y) + mousePos.normalized, Quaternion.Euler(0, 0, castAngle));
-        Vector2 shootForce = mousePos.normalized * 11;
-        Physics2D.IgnoreCollision(Flame.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
-        Flame.GetComponent<Rigidbody2D>().AddForce(shootForce, ForceMode2D.Impulse);
+        if (!Physics2D.Raycast(new Vector2(_player.position.x, _player.position.y) + mousePos.normalized*.5f, mousePos.normalized, .5f, 1<<LayerMask.NameToLayer("Collisions")))
+        {
+            GameObject Flame = Instantiate(_projectile, new Vector2(_player.position.x, _player.position.y) + mousePos.normalized, Quaternion.Euler(0, 0, castAngle));
+            Vector2 shootForce = mousePos.normalized * 11;
+            Physics2D.IgnoreCollision(Flame.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
+            Flame.GetComponent<Rigidbody2D>().AddForce(shootForce, ForceMode2D.Impulse);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

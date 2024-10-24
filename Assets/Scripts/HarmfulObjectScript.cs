@@ -9,6 +9,7 @@ public class HarmfulObjectScript : MonoBehaviour
     public bool destroyOnContact;
     public bool canDamagePlayer;
     public bool canDamageEnemy;
+    public bool thwartedByWalls;
     public GameObject Source;
 
     [SerializeField] private float existenceTime = 10f;
@@ -30,4 +31,5 @@ public class HarmfulObjectScript : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
 }
