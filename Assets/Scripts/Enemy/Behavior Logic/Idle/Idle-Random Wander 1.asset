@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Idle-Random Wander 1
   m_EditorClassIdentifier: 
   RandomMovementRange: 2
-  RandomMovementSpeed: 0.2
+  RandomMovementSpeed: 0.4

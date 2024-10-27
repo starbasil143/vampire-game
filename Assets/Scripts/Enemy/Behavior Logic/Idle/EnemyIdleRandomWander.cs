@@ -8,6 +8,8 @@ public class EnemyIdleRandomWander : EnemyIdleSOBase
     
     private Vector3 _targetPos;
     private Vector3 _direction; 
+    private float currentMoveTimerMax;
+    private float currentMoveTimer = 0;
 
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
@@ -18,6 +20,8 @@ public class EnemyIdleRandomWander : EnemyIdleSOBase
         base.DoEnterLogic();
         
         _targetPos = GetRandomPointInCircle();
+        Debug.Log(Mathf.Abs((_targetPos - transform.position).magnitude));
+        currentMoveTimerMax = 2 * Mathf.Abs((_targetPos - transform.position).magnitude);
     }
     public override void DoExitLogic()
     {
@@ -31,13 +35,17 @@ public class EnemyIdleRandomWander : EnemyIdleSOBase
     {
         base.DoPhysicsUpdateLogic();
 
+        currentMoveTimer += Time.deltaTime;
+
         _direction = (_targetPos - enemy.transform.position).normalized;
 
         enemy.MoveEnemy(_direction * RandomMovementSpeed);
 
-        if((enemy.transform.position - _targetPos).sqrMagnitude < 0.01f)
+        if((enemy.transform.position - _targetPos).sqrMagnitude < 0.01f || currentMoveTimer >= currentMoveTimerMax)
         {
             _targetPos = GetRandomPointInCircle();
+            currentMoveTimerMax = Mathf.Abs((_targetPos - transform.position).magnitude);
+            currentMoveTimer = 0;
         }
     }
     public override void ResetValues()
