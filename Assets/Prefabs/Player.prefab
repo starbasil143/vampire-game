@@ -115,6 +115,7 @@ MonoBehaviour:
   _guardCooldown: 0.5
   DashSoundSource: {fileID: 3058480749470883550}
   GuardSoundSource: {fileID: 0}
+  onPause: 0
 --- !u!114 &8188982550073087845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,15 +131,22 @@ MonoBehaviour:
   _camera: {fileID: 0}
   _player: {fileID: 517954443355681963}
   _projectile: {fileID: 7239454338204669779, guid: bd5c00ecbd32ef648ba44606284c1b75, type: 3}
+  _pauseCanvas: {fileID: 0}
+  _deathCanvas: {fileID: 0}
+  tutorialController: {fileID: 0}
   spellChargeSpeed: 0.02
   maxSoulAmount: 100
   soulAmount: 100
   healthBar: {fileID: 0}
+  onPause: 0
+  inTutorial: 0
+  hasSoulFragment: 0
   FireSoundSource: {fileID: 3377137558293152933}
   DashSoundSource: {fileID: 3058480749470883550}
   DamageSoundSource: {fileID: 470033823814364288}
   GuardSoundSource: {fileID: 5352395205164774453}
   ParrySoundSource: {fileID: 2044563958142457009}
+  HealSoundSource: {fileID: 0}
   currentPlayerState: 0
   isGuarding: 0
 --- !u!50 &8246157116208321928
@@ -246,7 +254,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e4fa50757df63c945b2ee988bcddec5c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.817
+  m_Volume: 0.685
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -342,7 +350,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a188bcd4cb8a39d46b41182231cb3ea0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.651
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -438,7 +446,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: bb9c2d930b7cc0842a7bf3e535997e0e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.734
   m_Pitch: 1
   Loop: 0
   Mute: 0

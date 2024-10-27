@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
@@ -11,6 +10,10 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private Transform _player;
     [SerializeField] private GameObject _projectile;
+    public GameObject _pauseCanvas;
+    public GameObject _deathCanvas;
+    public GameObject tutorialController;
+    public GameObject Endgoal;
     private Animator _animator;
     private Rigidbody2D _rigidbody;
     private bool isChargingSpell;
@@ -20,6 +23,8 @@ public class PlayerScript : MonoBehaviour
     public float soulAmount = 100f;
     public Image healthBar;
     public bool onPause;
+    public bool inTutorial;
+    public bool hasSoulFragment;
 
     public AudioSource FireSoundSource;
     public AudioSource DashSoundSource;
@@ -84,6 +89,11 @@ public class PlayerScript : MonoBehaviour
 
         #endregion
     
+
+        if (InputManager.Pause && !inTutorial)
+        {
+            PauseGame();
+        }
     
     }
 
@@ -98,6 +108,10 @@ public class PlayerScript : MonoBehaviour
             Vector2 shootForce = mousePos.normalized * 11;
             Physics2D.IgnoreCollision(Flame.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
             Flame.GetComponent<Rigidbody2D>().AddForce(shootForce, ForceMode2D.Impulse);
+            if (!hasSoulFragment)
+            {
+                Damage(4f, true);
+            }
         }
     }
 
@@ -137,18 +151,43 @@ public class PlayerScript : MonoBehaviour
    
         if (collision.gameObject.CompareTag("HealPickup"))
         {
-            Heal(50f);
+            Heal(75f);
             Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("SoulFragment"))
+        {
+            hasSoulFragment = true;
+            Heal(100f);
+            Destroy(collision.gameObject);
+            SoulFragmentGet();
+        }
+
+        if (collision.gameObject.CompareTag("DialogueTrigger"))
+        {
+            tutorialController.GetComponent<OpeningSceneManager>().GetDialogueTrigger(collision);
+        }
+
+        if (collision.gameObject.CompareTag("DirectAttack"))
+        {
+            Damage(24f);
+        }
+
+        if (collision.gameObject.CompareTag("Win"))
+        {
+            SceneManager.LoadScene("Win");
         }
     }
 
-    private void Damage(float damage)
+    private void Damage(float damage, bool silent = false)
     {
         soulAmount -= damage;
         healthBar.fillAmount = soulAmount / 100f;
-        _animator.Play("Damage", -1, 0f);
-        DamageSoundSource.Play();
-        Debug.Log(soulAmount);
+        if (!silent)
+        {
+            _animator.Play("Damage", -1, 0f);
+            DamageSoundSource.Play();
+        }
         if(soulAmount <= 0)
         {
             Die();
@@ -172,7 +211,10 @@ public class PlayerScript : MonoBehaviour
 
     private void Die()
     {
-        gameObject.transform.localScale = new Vector3(1,.1f,1);
+        inTutorial = true;
+        onPause = true;
+        gameObject.SetActive(false);
+        _deathCanvas.SetActive(true);
     }
 
 
@@ -192,4 +234,27 @@ public class PlayerScript : MonoBehaviour
     }
 
     #endregion
+
+
+    public void PauseGame()
+    {
+        onPause = !onPause;
+        GetComponent<PlayerMovement>().onPause = onPause;
+        if(onPause)
+        {
+            _pauseCanvas.SetActive(true);
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            _pauseCanvas.SetActive(false);
+            Time.timeScale = 1f;
+        }
+    }
+
+    public void SoulFragmentGet()
+    {
+        _animator.Play("SoulFragmentGet");
+        Endgoal.SetActive(true);
+    }
 }

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class HarmfulObjectScript : MonoBehaviour
@@ -10,6 +9,7 @@ public class HarmfulObjectScript : MonoBehaviour
     public bool canDamagePlayer;
     public bool canDamageEnemy;
     public bool thwartedByWalls;
+    public bool lightsCandles;
     public GameObject Source;
     public GameObject ImpactObject;
 

@@ -8,6 +8,10 @@ TagManager:
   - EnemyDamager
   - PlayerDamager
   - HealPickup
+  - SoulFragment
+  - DialogueTrigger
+  - DirectAttack
+  - Win
   layers:
   - Default
   - TransparentFX
@@ -71,4 +75,7 @@ TagManager:
     locked: 0
   - name: Weather
     uniqueID: 4165705163
+    locked: 0
+  - name: PauseMenu
+    uniqueID: 313353971
     locked: 0

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +9,7 @@ public class InputManager : MonoBehaviour
     public static bool CastingUp;
     public static bool Guard;
     public static bool Continue;
+    public static bool Pause;
 
     private PlayerInput _playerInput;
     private InputAction _moveAction;
@@ -18,6 +17,7 @@ public class InputManager : MonoBehaviour
     private InputAction _castAction;
     private InputAction _guardAction;
     private InputAction _continueAction;
+    private InputAction _pauseAction;
 
 
     private void Awake()
@@ -29,6 +29,7 @@ public class InputManager : MonoBehaviour
         _castAction = _playerInput.actions["Cast"];
         _guardAction = _playerInput.actions["Guard"];
         _continueAction = _playerInput.actions["Continue"];
+        _pauseAction = _playerInput.actions["Pause"];
     }
 
     private void Update()
@@ -39,5 +40,6 @@ public class InputManager : MonoBehaviour
         CastingUp = _castAction.WasReleasedThisFrame();
         Guard = _guardAction.WasPressedThisFrame();
         Continue = _continueAction.WasPressedThisFrame();
+        Pause = _pauseAction.WasPressedThisFrame();
     }
 }

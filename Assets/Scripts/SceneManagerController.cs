@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,5 +17,13 @@ public class SceneManagerController : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("LevelOne");
+    }
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("TitleScreen");
+    }
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

@@ -237,6 +237,7 @@ MonoBehaviour:
   canDamagePlayer: 0
   canDamageEnemy: 1
   thwartedByWalls: 1
+  lightsCandles: 1
   Source: {fileID: 0}
   ImpactObject: {fileID: 2186346049821954144, guid: 333276601996a214e8b41533c7197a4a, type: 3}
   existenceTime: 10
