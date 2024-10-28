@@ -56,6 +56,7 @@ public class PlayerScript : MonoBehaviour
         currentPlayerState = PlayerState.Idle;
         
         healthBar.fillAmount = soulAmount / 100f;
+        
     }
 
     void Update()

@@ -20,7 +20,6 @@ public class EnemyIdleRandomWander : EnemyIdleSOBase
         base.DoEnterLogic();
         
         _targetPos = GetRandomPointInCircle();
-        Debug.Log(Mathf.Abs((_targetPos - transform.position).magnitude));
         currentMoveTimerMax = 2 * Mathf.Abs((_targetPos - transform.position).magnitude);
     }
     public override void DoExitLogic()

@@ -206,6 +206,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 662208535189514080, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267665534501238986, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5571606803976497708, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
       propertyPath: m_LocalPosition.x
       value: 69.01104
@@ -244,6 +252,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5571606803976497708, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7852314655581092714, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: isLit
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1127,6 +1139,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 662208535189514080, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267665534501238986, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5571606803976497708, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
       propertyPath: m_LocalPosition.x
       value: 69.03811
@@ -1165,6 +1185,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5571606803976497708, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7852314655581092714, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: isLit
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -7163,6 +7187,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle
       objectReference: {fileID: 0}
+    - target: {fileID: 662208535189514080, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267665534501238986, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5571606803976497708, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -7209,6 +7241,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5571606803976497708, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7852314655581092714, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: isLit
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7852314655581092714, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
@@ -7370,6 +7406,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 662208535189514080, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267665534501238986, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5571606803976497708, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
       propertyPath: m_LocalPosition.x
       value: 76.85645
@@ -7408,6 +7452,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5571606803976497708, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7852314655581092714, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: isLit
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7852314655581092714, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
@@ -45416,6 +45464,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 662208535189514080, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5571606803976497708, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
       propertyPath: m_LocalPosition.x
       value: 69.05
@@ -54316,6 +54368,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 662208535189514080, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267665534501238986, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5571606803976497708, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -54371,6 +54431,10 @@ PrefabInstance:
     - target: {fileID: 6309142809331000963, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
       propertyPath: m_SortingLayerID
       value: 609906891
+      objectReference: {fileID: 0}
+    - target: {fileID: 7852314655581092714, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: isLit
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7852314655581092714, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
       propertyPath: AssociatedObject
@@ -54765,6 +54829,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 662208535189514080, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267665534501238986, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5571606803976497708, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
       propertyPath: m_LocalPosition.x
       value: 61.54929
@@ -54803,6 +54875,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5571606803976497708, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7852314655581092714, guid: 95d21f87bc8204349bc172fbf21f4b42, type: 3}
+      propertyPath: isLit
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -59944,10 +60020,10 @@ SceneRoots:
   - {fileID: 676716244}
   - {fileID: 2031294183}
   - {fileID: 757973383}
-  - {fileID: 2144146668}
   - {fileID: 392453781}
   - {fileID: 15693263}
   - {fileID: 1807634553}
+  - {fileID: 2144146668}
   - {fileID: 1468051760}
   - {fileID: 1481748776}
   - {fileID: 1609633900}
