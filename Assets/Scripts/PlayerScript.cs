@@ -144,7 +144,7 @@ public class PlayerScript : MonoBehaviour
                 Damage(collision.gameObject.GetComponent<HarmfulObjectScript>().damageAmount);
                 if (collision.gameObject.GetComponent<HarmfulObjectScript>().destroyOnContact)
                 {
-                    Destroy(collision.gameObject);
+                    collision.gameObject.GetComponent<HarmfulObjectScript>().DestroySelf();
                 }
             }
         }
@@ -171,6 +171,7 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("DirectAttack"))
         {
             Damage(24f);
+            DamageSoundSource.Play();
         }
 
         if (collision.gameObject.CompareTag("Win"))
@@ -186,7 +187,7 @@ public class PlayerScript : MonoBehaviour
         if (!silent)
         {
             _animator.Play("Damage", -1, 0f);
-            DamageSoundSource.Play();
+            //DamageSoundSource.Play();
         }
         if(soulAmount <= 0)
         {

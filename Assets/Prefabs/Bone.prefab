@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1198201909
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 31af1549edf8101409e65a4079911e21, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -191,5 +191,7 @@ MonoBehaviour:
   canDamagePlayer: 1
   canDamageEnemy: 1
   thwartedByWalls: 1
+  lightsCandles: 0
   Source: {fileID: 0}
+  ImpactObject: {fileID: 8744094675321420960, guid: f5323fae0b0d4bb449a32d2f8d96abde, type: 3}
   existenceTime: 10
