@@ -32,6 +32,7 @@ public class PlayerScript : MonoBehaviour
     public AudioSource GuardSoundSource;
     public AudioSource ParrySoundSource;
     public AudioSource HealSoundSource;
+    public AudioSource FailSoundSource;
 
     public enum PlayerState
     {
@@ -55,7 +56,7 @@ public class PlayerScript : MonoBehaviour
     {
         currentPlayerState = PlayerState.Idle;
         
-        healthBar.fillAmount = soulAmount / 100f;
+        healthBar.fillAmount = soulAmount / maxSoulAmount;
         
     }
 
@@ -100,19 +101,26 @@ public class PlayerScript : MonoBehaviour
 
     void SacredFlame()
     {
-        Vector2 mousePos = new Vector2(Input.mousePosition.x - Screen.width/2, Input.mousePosition.y - Screen.height/2);
-        float castAngle = Vector2.SignedAngle(Vector2.right, mousePos);
-        if (!Physics2D.Raycast(new Vector2(_player.position.x, _player.position.y) + mousePos.normalized*.5f, mousePos.normalized, .5f, 1<<LayerMask.NameToLayer("Collisions")))
+        if (soulAmount >= 5f)
         {
-            FireSoundSource.Play();
-            GameObject Flame = Instantiate(_projectile, new Vector2(_player.position.x, _player.position.y) + mousePos.normalized, Quaternion.Euler(0, 0, castAngle));
-            Vector2 shootForce = mousePos.normalized * 11;
-            Physics2D.IgnoreCollision(Flame.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
-            Flame.GetComponent<Rigidbody2D>().AddForce(shootForce, ForceMode2D.Impulse);
-            if (!hasSoulFragment)
+            Vector2 mousePos = new Vector2(Input.mousePosition.x - Screen.width/2, Input.mousePosition.y - Screen.height/2);
+            float castAngle = Vector2.SignedAngle(Vector2.right, mousePos);
+            if (!Physics2D.Raycast(new Vector2(_player.position.x, _player.position.y) + mousePos.normalized*.5f, mousePos.normalized, .5f, 1<<LayerMask.NameToLayer("Collisions")))
             {
-                Damage(4f, true);
+                FireSoundSource.Play();
+                GameObject Flame = Instantiate(_projectile, new Vector2(_player.position.x, _player.position.y) + mousePos.normalized, Quaternion.Euler(0, 0, castAngle));
+                Vector2 shootForce = mousePos.normalized * 11;
+                Physics2D.IgnoreCollision(Flame.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
+                Flame.GetComponent<Rigidbody2D>().AddForce(shootForce, ForceMode2D.Impulse);
+                if (!hasSoulFragment)
+                {
+                    Damage(4f, true);
+                }
             }
+        }
+        else
+        {
+            FailSoundSource.Play();
         }
     }
 
@@ -127,6 +135,8 @@ public class PlayerScript : MonoBehaviour
                 collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude 
                 * (collision.gameObject.transform.position - transform.position).normalized;
 
+                collision.gameObject.GetComponent<HarmfulObjectScript>().damageAmount *= 3.5f;
+
                 if (collision.gameObject.GetComponent<RotateScript>())
                 {
                     collision.gameObject.GetComponent<RotateScript>().rotationSpeed *= -1;
@@ -139,6 +149,7 @@ public class PlayerScript : MonoBehaviour
                     collision.gameObject.GetComponent<HarmfulObjectScript>().Source.GetComponent<Collider2D>(), 
                     false);
                 }
+                Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
             }
             else
             {
@@ -152,14 +163,14 @@ public class PlayerScript : MonoBehaviour
    
         if (collision.gameObject.CompareTag("HealPickup"))
         {
-            Heal(75f);
+            Heal(120f);
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.CompareTag("SoulFragment"))
         {
             hasSoulFragment = true;
-            Heal(100f);
+            Heal(maxSoulAmount);
             Destroy(collision.gameObject);
             SoulFragmentGet();
         }
@@ -184,7 +195,7 @@ public class PlayerScript : MonoBehaviour
     private void Damage(float damage, bool silent = false)
     {
         soulAmount -= damage;
-        healthBar.fillAmount = soulAmount / 100f;
+        healthBar.fillAmount = soulAmount / maxSoulAmount;
         if (!silent)
         {
             _animator.Play("Damage", -1, 0f);
@@ -207,7 +218,7 @@ public class PlayerScript : MonoBehaviour
             soulAmount = maxSoulAmount;
         }
         
-        healthBar.fillAmount = soulAmount / 100f;
+        healthBar.fillAmount = soulAmount / maxSoulAmount;
         HealSoundSource.Play();
     }
 
@@ -240,9 +251,7 @@ public class PlayerScript : MonoBehaviour
 
     public void PauseGame()
     {
-        onPause = !onPause;
-        GetComponent<PlayerMovement>().onPause = onPause;
-        if(onPause)
+        if(!onPause)
         {
             _pauseCanvas.SetActive(true);
             Time.timeScale = 0f;
@@ -252,6 +261,8 @@ public class PlayerScript : MonoBehaviour
             _pauseCanvas.SetActive(false);
             Time.timeScale = 1f;
         }
+        onPause = !onPause;
+        GetComponent<PlayerMovement>().onPause = onPause;
     }
 
     public void SoulFragmentGet()

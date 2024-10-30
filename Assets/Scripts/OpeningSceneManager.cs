@@ -30,15 +30,20 @@ public class OpeningSceneManager : MonoBehaviour
 
     private void Update()
     {
+        
+        Debug.Log("dialogue: " + dialogueNumber.ToString());
         if (InputManager.Continue)
         {
-            if (SkippableDialogues.Contains(dialogueNumber))
+            if( DialogueBox.activeSelf == true)
             {
-                ContinueDialogue();
-            }
-            if (ClosableDialogues.Contains(dialogueNumber))
-            {
-                HoldDialogue();
+                if (ClosableDialogues.Contains(dialogueNumber))
+                {
+                    HoldDialogue();
+                }
+                else if (SkippableDialogues.Contains(dialogueNumber))
+                {
+                    ContinueDialogue();
+                }
             }
         }
     }
@@ -84,7 +89,7 @@ public class OpeningSceneManager : MonoBehaviour
                 _player.GetComponent<PlayerMovement>().onPause = false;
                 _player.GetComponent<PlayerScript>().inTutorial = false;
             break;
-            case 6:
+            case 5:
                 NormalUI.SetActive(true);
             break;
             case 9:
@@ -92,6 +97,9 @@ public class OpeningSceneManager : MonoBehaviour
             break;
             case 10:
                 fragmentimage.SetActive(false);
+            break;
+            case 11:
+                fragmentimage.SetActive(true);
             break;
         }
     }
